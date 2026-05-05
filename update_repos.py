@@ -5,7 +5,7 @@ import os
 
 # Konfiguration
 USERNAME = "oxx0r"
-EXCLUDED_REPO = "oxx0r.github.io, Enshrouded-Patcher-Config-Editor"
+EXCLUDED_REPOS = ["oxx0r.github.io", "Enshrouded-Patcher-Config-Editor"]
 # Der Token wird sicher aus den GitHub Secrets gelesen
 TOKEN = os.getenv("GH_TOKEN")
 
@@ -52,8 +52,8 @@ def main():
     filtered_repos = []
 
     for repo in repos:
-        # Filter: Keine Forks, nicht das eigene Profil-Repo
-        if repo["fork"] or repo["name"] == EXCLUDED_REPO:
+        # Wir prüfen jetzt, ob der Name des aktuellen Repos in unserer Liste steht
+        if repo["fork"] or repo["name"] in EXCLUDED_REPOS:
             continue
         
         print(f"Verarbeite: {repo['name']}")
