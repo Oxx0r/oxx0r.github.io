@@ -5,7 +5,7 @@ import os
 
 # Konfiguration
 USERNAME = "oxx0r"
-EXCLUDED_REPO = "oxx0r.github.io"
+EXCLUDED_REPO = "oxx0r.github.io, Enshrouded-Patcher-Config-Editor"
 # Der Token wird sicher aus den GitHub Secrets gelesen
 TOKEN = os.getenv("GH_TOKEN")
 
