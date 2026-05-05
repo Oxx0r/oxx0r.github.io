@@ -1,63 +1,100 @@
 /**
- * Hauptfunktion zum Abrufen und Anzeigen der Repositories
+ * Konfiguration
+ */
+const GITHUB_USERNAME = 'oxx0r';
+const EXCLUDED_REPO = 'oxx0r.github.io'; // Dein Profil-Repo, das nicht gelistet werden soll
+
+/**
+ * Sucht in der README.md nach dem ersten Markdown-Bild-Link
+ */
+async function getCoverImage(repoName) {
+    try {
+        // Wir fragen die README über den Raw-Link ab (effizienter als API für den Inhalt)
+        const response = await fetch(`https://raw.githubusercontent.com/${GITHUB_USERNAME}/${repoName}/master/README.md`);
+        if (!response.ok) return null;
+
+        const text = await response.text();
+
+        // Regex sucht nach ![alt-text](url)
+        const imageMatch = text.match(/!\[.*\]\((.*?)\)/);
+        
+        if (imageMatch && imageMatch[1]) {
+            let url = imageMatch[1];
+            // Falls es ein relativer Pfad ist, machen wir ihn absolut
+            if (!url.startsWith('http')) {
+                url = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${repoName}/master/${url}`;
+            }
+            return url;
+        }
+    } catch (error) {
+        console.warn(`Kein Bild für ${repoName} gefunden.`);
+    }
+    return null;
+}
+
+/**
+ * Holt alle Repos und baut die Karten
  */
 async function fetchRepos() {
     const container = document.getElementById('repo-container');
-    const USERNAME = 'oxx0r'; // Dein Benutzername
-
+    
     try {
-        // Schritt 1: Alle öffentlichen Repos abrufen
-        // Wir hängen ?per_page=100 an, um möglichst viele auf einmal zu bekommen
-        const response = await fetch(`https://api.github.com/users/${USERNAME}/repos?sort=updated&per_page=100`);
+        // 1. Repos abrufen
+        const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100`);
+        if (!response.ok) throw new Error('GitHub API Limit erreicht oder Nutzer nicht gefunden.');
         
-        if (!response.ok) throw new Error('Fehler beim Abrufen der Repos');
-        
-        const repos = await response.json();
-        container.innerHTML = ''; // Lade-Anzeige entfernen
+        let repos = await response.json();
 
-        // Schritt 2: Repos durchlaufen
+        // 2. Filter: Keine Forks, kein Profil-Repo
+        repos = repos.filter(repo => !repo.fork && repo.name !== EXCLUDED_REPO);
+
+        // 3. Sortieren: Alphabetisch A-Z
+        repos.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+
+        container.innerHTML = ''; // Ladeanzeige entfernen
+
+        // 4. Jedes Repo verarbeiten
         for (const repo of repos) {
-            // Wir ignorieren Forks, um nur eigene Projekte zu zeigen (optional)
-            if (repo.fork) continue;
-
             const card = document.createElement('div');
             card.className = 'repo-card';
 
-            // Platzhalter für den Download-Button
-            let downloadBtn = '';
+            // Bild und Release parallel anfragen (optional zur Performance-Steigerung)
+            const coverUrl = await getCoverImage(repo.name);
+            
+            // HTML für das Bild (nur wenn vorhanden)
+            const imgHtml = coverUrl 
+                ? `<img src="${coverUrl}" class="repo-cover" alt="${repo.name} Cover">` 
+                : `<div class="repo-cover" style="display:flex; align-items:center; justify-content:center; color:#30363d;">Kein Cover</div>`;
 
-            // Schritt 3: Prüfen, ob das Repo Releases hat
-            // GitHub bietet leider kein "has_release" Flag in der Repo-Liste an,
-            // daher fragen wir den Release-Endpunkt direkt ab.
+            // Release check
+            let downloadHtml = '';
             try {
-                const relResponse = await fetch(`https://api.github.com/repos/${USERNAME}/${repo.name}/releases/latest`);
+                const relResponse = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${repo.name}/releases/latest`);
                 if (relResponse.ok) {
                     const release = await relResponse.json();
-                    downloadBtn = `
-                        <div class="release-info">
-                            <span class="tag">Version: ${release.tag_name}</span>
-                            <a href="${release.html_url}" target="_blank" class="btn-download">Latest Release</a>
-                        </div>`;
+                    downloadHtml = `<a href="${release.html_url}" target="_blank" class="btn-download">Latest Release</a>`;
                 }
-            } catch (e) {
-                // Wenn kein Release da ist, bleibt der Button einfach leer
-            }
+            } catch (e) { /* Kein Release gefunden */ }
 
-            // Schritt 4: Card-Inhalt erstellen
+            // Karte zusammenbauen
             card.innerHTML = `
-                <h2>${repo.name}</h2>
-                <p>${repo.description || 'Keine Beschreibung verfügbar.'}</p>
-                <div class="stats">
-                    ⭐ ${repo.stargazers_count} | 🍴 ${repo.forks_count} | 🛠 ${repo.language || 'Plain'}
+                ${imgHtml}
+                <div class="repo-content">
+                    <a href="${repo.html_url}" target="_blank" class="repo-title-link">${repo.name}</a>
+                    <p class="repo-description">${repo.description || 'Keine Beschreibung hinterlegt.'}</p>
+                    
+                    <div class="button-wrapper">
+                        ${downloadHtml}
+                    </div>
                 </div>
-                ${downloadBtn}
-                <hr>
             `;
+            
             container.appendChild(card);
         }
     } catch (error) {
-        container.innerHTML = `<p style="color:red;">Fehler: ${error.message}</p>`;
+        container.innerHTML = `<div class="status-msg" style="color: #f85149;">Fehler: ${error.message}</div>`;
     }
 }
 
+// Start
 fetchRepos();

@@ -3,17 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mein Portfolio</title>
+    <title>oxx0r | Portfolio</title>
     <style>
-        body { font-family: sans-serif; line-height: 1.6; padding: 20px; background: #f4f4f4; }
-        .repo-card { background: white; border-radius: 8px; padding: 15px; margin-bottom: 15px; shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .btn-download { display: inline-block; background: #28a745; color: white; padding: 8px 12px; text-decoration: none; border-radius: 4px; margin-top: 10px; }
-        .no-release { color: #888; font-size: 0.9em; }
+        /* Globaler Darkmode-Look */
+        body { 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            background-color: #0d1117; 
+            color: #c9d1d9; 
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        h1 { 
+            text-align: center; 
+            color: #58a6ff; 
+            margin-bottom: 50px; 
+            font-size: 2.5em;
+        }
+
+        /* Das Grid-System: Passt sich automatisch der Bildschirmbreite an */
+        #repo-container { 
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* Die Repo-Karte als Flex-Container */
+        .repo-card { 
+            background-color: #161b22; 
+            border: 1px solid #30363d; 
+            border-radius: 12px; 
+            display: flex;
+            flex-direction: column; /* Stapelt Bild, Text und Button übereinander */
+            overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            height: 100%; /* Wichtig für einheitliche Zeilenhöhen im Grid */
+        }
+
+        .repo-card:hover {
+            transform: translateY(-8px);
+            border-color: #58a6ff;
+        }
+
+        /* Das Cover-Bild: Komplett sichtbar durch 'contain' */
+        .repo-cover {
+            width: 100%;
+            height: 200px; /* Feste Höhe für die Konsistenz */
+            object-fit: contain; /* Bild wird nicht beschnitten, zeigt alles */
+            background-color: #010409; /* Schwarzer Hintergrund für Bild-Leerräume */
+            border-bottom: 1px solid #30363d;
+        }
+
+        /* Container für den Textinhalt */
+        .repo-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1; /* Nimmt den restlichen Platz ein */
+        }
+
+        /* Titel als Link zum Repo */
+        .repo-title-link {
+            color: #58a6ff;
+            text-decoration: none;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
+        .repo-title-link:hover {
+            text-decoration: underline;
+        }
+
+        .repo-description {
+            font-size: 0.95em;
+            color: #8b949e;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        /* Button-Wrapper: Drückt den Button nach unten */
+        .button-wrapper {
+            margin-top: auto; /* Das "magische" CSS, das den Button nach unten schiebt */
+            padding-top: 10px;
+        }
+
+        .btn-download { 
+            display: block;
+            background-color: #238636; 
+            color: white; 
+            text-align: center;
+            padding: 12px; 
+            text-decoration: none; 
+            border-radius: 6px; 
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .btn-download:hover { 
+            background-color: #2ea043; 
+        }
+
+        /* Fehlermeldung oder Ladehinweis */
+        .status-msg {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 50px;
+            font-size: 1.2em;
+            color: #8b949e;
+        }
     </style>
 </head>
 <body>
-    <h1>Meine GitHub Projekte</h1>
-    <div id="repo-container">Lade Projekte...</div>
+
+    <h1>Portfolio</h1>
+    
+    <div id="repo-container">
+        <div class="status-msg">Lade Projekte...</div>
+    </div>
 
     <script src="script.js"></script>
 </body>
