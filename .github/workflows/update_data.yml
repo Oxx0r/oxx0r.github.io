@@ -4,6 +4,9 @@ on:
     - cron: '0 * * * *' # Jede Stunde
   workflow_dispatch: # Erlaubt manuelles Starten per Klick
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
