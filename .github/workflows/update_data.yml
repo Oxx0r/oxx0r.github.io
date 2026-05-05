@@ -1,0 +1,33 @@
+name: Update Portfolio Data
+on:
+  schedule:
+    - cron: '0 * * * *' # Jede Stunde
+  workflow_dispatch: # Erlaubt manuelles Starten per Klick
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Dependencies
+        run: pip install requests
+
+      - name: Run Update Script
+        env:
+          GH_TOKEN: ${{ secrets.PORTFOLIO_TOKEN }}
+        run: python update_repos.py
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add repos.json
+          git commit -m "Automatisches Update der repos.json" || exit 0
+          git push
