@@ -1,1 +1,37 @@
-[]
+[
+    {
+        "name": "BSG",
+        "description": "BSG",
+        "html_url": "https://github.com/Oxx0r/BSG",
+        "cover_image": "https://raw.githubusercontent.com/oxx0r/BSG/main/Mods/Workshop/2064475872.png",
+        "latest_release_url": "https://github.com/Oxx0r/BSG/releases/tag/v1.2"
+    },
+    {
+        "name": "BSG-PabloPatch",
+        "description": "Ein grafischer Mod-Patch für die Battlestar Galactica Implementation im Tabletop Simulator. Dieser Patch ersetzt diverse Texturen und Charakter-Gesichter durch das \"Pablo\"-Design.",
+        "html_url": "https://github.com/Oxx0r/BSG-PabloPatch",
+        "cover_image": "https://raw.githubusercontent.com/oxx0r/BSG-PabloPatch/main/Mods/Workshop/2064475872.png",
+        "latest_release_url": "https://github.com/Oxx0r/BSG-PabloPatch/releases/tag/v1.3.2"
+    },
+    {
+        "name": "Enshrouded-Patcher-Config-Editor",
+        "description": "Config Editor for \"Enshrouded Patcher\"",
+        "html_url": "https://github.com/Oxx0r/Enshrouded-Patcher-Config-Editor",
+        "cover_image": "https://github.com/user-attachments/assets/ac3bce9a-e71f-4ce9-be83-48e5cd8876e7",
+        "latest_release_url": "https://github.com/Oxx0r/Enshrouded-Patcher-Config-Editor/releases/tag/v1.0.4"
+    },
+    {
+        "name": "TI4",
+        "description": "TI4",
+        "html_url": "https://github.com/Oxx0r/TI4",
+        "cover_image": "https://raw.githubusercontent.com/oxx0r/TI4/main/Mods/Workshop/1288687076.png",
+        "latest_release_url": "https://github.com/Oxx0r/TI4/releases/tag/v1.3.2"
+    },
+    {
+        "name": "TI4-PabloPatch",
+        "description": "Ein grafischer Mod-Patch für die Twilight Imperium IV Implementation im Tabletop Simulator. Dieser Patch ersetzt diverse Texturen und Anführer-Gesichter durch das \"Pablo\"-Design.",
+        "html_url": "https://github.com/Oxx0r/TI4-PabloPatch",
+        "cover_image": "https://raw.githubusercontent.com/oxx0r/TI4-PabloPatch/main/Mods/Workshop/1288687076.png",
+        "latest_release_url": "https://github.com/Oxx0r/TI4-PabloPatch/releases/tag/v1.2.4"
+    }
+]
