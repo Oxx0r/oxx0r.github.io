@@ -14,20 +14,6 @@
         "latest_release_url": "https://github.com/Oxx0r/BSG-PabloPatch/releases/tag/v1.3.2"
     },
     {
-        "name": "Enshrouded-Patcher-Config-Editor",
-        "description": "Config Editor for \"Enshrouded Patcher\"",
-        "html_url": "https://github.com/Oxx0r/Enshrouded-Patcher-Config-Editor",
-        "cover_image": "https://github.com/user-attachments/assets/ac3bce9a-e71f-4ce9-be83-48e5cd8876e7",
-        "latest_release_url": "https://github.com/Oxx0r/Enshrouded-Patcher-Config-Editor/releases/tag/v1.0.4"
-    },
-    {
-        "name": "oxx0r.github.io",
-        "description": "Portfolio",
-        "html_url": "https://github.com/Oxx0r/oxx0r.github.io",
-        "cover_image": null,
-        "latest_release_url": null
-    },
-    {
         "name": "TI4",
         "description": "Die ultimative digitale Umsetzung von Twilight Imperium IV für den Tabletop Simulator.",
         "html_url": "https://github.com/Oxx0r/TI4",
