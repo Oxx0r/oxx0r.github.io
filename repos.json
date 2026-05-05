@@ -21,6 +21,13 @@
         "latest_release_url": "https://github.com/Oxx0r/Enshrouded-Patcher-Config-Editor/releases/tag/v1.0.4"
     },
     {
+        "name": "oxx0r.github.io",
+        "description": "Portfolio",
+        "html_url": "https://github.com/Oxx0r/oxx0r.github.io",
+        "cover_image": null,
+        "latest_release_url": null
+    },
+    {
         "name": "TI4",
         "description": "Die ultimative digitale Umsetzung von Twilight Imperium IV für den Tabletop Simulator.",
         "html_url": "https://github.com/Oxx0r/TI4",
