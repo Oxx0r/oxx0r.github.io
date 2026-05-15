@@ -4,7 +4,7 @@
         "description": "Battlestar Galactica: Eine umfassende Skript-Version des Brettspiel-Klassikers von Fantasy Flight Games für den Tabletop Simulator.",
         "html_url": "https://github.com/Oxx0r/BSG",
         "cover_image": "https://raw.githubusercontent.com/oxx0r/BSG/main/Mods/Workshop/2064475872.png",
-        "latest_release_url": "https://github.com/Oxx0r/BSG/releases/tag/v1.2"
+        "latest_release_url": "https://github.com/Oxx0r/BSG/releases/tag/v1.2.1"
     },
     {
         "name": "BSG-PabloPatch",
@@ -18,7 +18,7 @@
         "description": "Die ultimative digitale Umsetzung von Twilight Imperium IV für den Tabletop Simulator.",
         "html_url": "https://github.com/Oxx0r/TI4",
         "cover_image": "https://raw.githubusercontent.com/oxx0r/TI4/main/Mods/Workshop/1288687076.png",
-        "latest_release_url": "https://github.com/Oxx0r/TI4/releases/tag/v1.3.2"
+        "latest_release_url": "https://github.com/Oxx0r/TI4/releases/tag/v1.3.3"
     },
     {
         "name": "TI4-PabloPatch",
