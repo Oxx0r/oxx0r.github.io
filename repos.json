@@ -14,6 +14,13 @@
         "latest_release_url": "https://github.com/Oxx0r/BSG-PabloPatch/releases/tag/v1.3.2"
     },
     {
+        "name": "oxx_face_swap",
+        "description": "⚡ Offline Face Swap für Windows, Linux & macOS. KI-basierter Gesichtstausch via GUI und CLI – 100% lokal ohne Cloud.",
+        "html_url": "https://github.com/Oxx0r/oxx_face_swap",
+        "cover_image": "https://raw.githubusercontent.com/oxx0r/oxx_face_swap/main/docs/beispiel.png",
+        "latest_release_url": null
+    },
+    {
         "name": "TI4",
         "description": "Die ultimative digitale Umsetzung von Twilight Imperium IV für den Tabletop Simulator.",
         "html_url": "https://github.com/Oxx0r/TI4",
